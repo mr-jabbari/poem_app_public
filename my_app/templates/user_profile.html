@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+	{% for beyt in beyts %}
+		<div class="container text-center">
+  		<div class="row">
+			{% if current_user.is_authenticated %}
+    			<div class="col-sm-4"><p>{{ beyt.mesra1 }}</p></div>
+    			<div class="col-sm-4"><p>{{ beyt.mesra2 }}</p></div>
+    		{% else %}
+				<div class="col-sm-5"><p>{{ beyt.mesra1 }}</p></div>
+	    		<div class="col-sm-5"><p>{{ beyt.mesra2 }}</p></div>
+			{% endif %}
+			<div class="col-sm-2"><p>{{ beyt.poet }}</p></div>
+				{% if current_user.is_authenticated %}
+					{% if current_user.has_liked_beyt(beyt) %}
+						<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('likebeyt_action', beyt_id=beyt.id, action='unlike') }}">Dislike</a></div>
+					{% else %}
+						<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('likebeyt_action', beyt_id=beyt.id, action='like') }}">like</a></div>
+					{% endif %}
+					{% if current_user.has_bookmarked_beyt(beyt) %}
+    					<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('bookmarkbeyt_action', beyt_id=beyt.id, action='unbookmark') }}">Unmark</a></div>
+					{% else %}
+						<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('bookmarkbeyt_action', beyt_id=beyt.id, action='bookmark') }}">Bookmark</a></div>
+					{% endif %}
+				{% endif %}
+		  	<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('t_beyt', beyt_id=beyt.id) }}">more info</a></div>
+			</div>
+		</div>
+		<div class="border"></div>
+	{% endfor %}
+
+
+
+
+
+
+
+
+	{% for poem in poems %}
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt1_1 }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt1_2 }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt2_1 }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt2_2 }}</p></div>
+			{% if poem.beyt3_1 %}
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt3_1 }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt3_2 }}</p></div>
+			{% endif %}
+			{% if poem.beyt4_1 %}
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt4_1 }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt4_2 }}</p></div>
+			{% endif %}
+				{% if current_user.is_authenticated %}
+					{% if current_user.has_liked_poem(poem) %}
+						<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('likepoem_action', poem_id=poem.id, action='unlike') }}">Dislike</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('likepoem_action', poem_id=poem.id, action='like') }}">like</a></div>
+					{% endif %}
+						<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.poet }}</p></div>
+					{% if current_user.has_bookmarked_poem(poem) %}
+    					<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('bookmarkpoem_action', poem_id=poem.id, action='unbookmark') }}">Unmark</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('bookmarkpoem_action', poem_id=poem.id, action='bookmark') }}">Bookmark</a></div>
+					{% endif %}
+				{% endif %}
+		<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('t_poem', poem_id=poem.id) }}">more info</a></div>
+	{% endfor %}
+
+
+
+
+	{% for speech in speechs %}
+			<div class="col col-sm-12 col-md-8 col-lg-8"><p>{{ speech.speech }}</p></div>
+			<div class="col col-sm-6 col-md-2 col-lg-2"><p>{{ speech.wise }}</p></div>
+			<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('t_speech', speech_id=speech.id) }}">more info</a></div>
+				{% if current_user.is_authenticated %}
+					{% if current_user.has_liked_speech(speech) %}
+						<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('likespeech_action', speech_id=speech.id, action='unlike') }}">Dislike</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('likespeech_action', speech_id=speech.id, action='like') }}">like</a></div>
+					{% endif %}
+					{% if current_user.has_bookmarked_speech(speech) %}
+    					<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('bookmarkspeech_action', speech_id=speech.id, action='unbookmark') }}">Unmark</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('bookmarkspeech_action', speech_id=speech.id, action='bookmark') }}">Bookmark</a></div>
+					{% endif %}
+				{% endif %}
+			<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('t_speech', speech_id=speech.id) }}">more info</a></div>
+	{% endfor %}
+
+
+
+
+	{% for story in stories %}
+			<div class="col col-sm-6 col-md-2 col-lg-2"><p>{{ story.title }}</p></div>
+			<div class="col col-sm-12 col-md-8 col-lg-8"><p>{{ story.story }}</p></div>
+			<div class="col col-sm-6 col-md-2 col-lg-2"><p>{{ story.writer }}</p></div>
+			<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('t_story', story_id=story.id) }}">more info</a></div>
+				{% if current_user.is_authenticated %}
+					{% if current_user.has_liked_story(story) %}
+						<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('likestory_action', story_id=story.id, action='unlike') }}">Dislike</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('likestory_action', story_id=story.id, action='like') }}">like</a></div>
+					{% endif %}
+					{% if current_user.has_bookmarked_story(story) %}
+    					<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('bookmarkstory_action', story_id=story.id, action='unbookmark') }}">Unmark</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('bookmarkstory_action', story_id=story.id, action='bookmark') }}">Bookmark</a></div>
+					{% endif %}
+				{% endif %}
+			<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('t_story', story_id=story.id) }}">more info</a></div>
+	{% endfor %}
+
+
+{% endblock %}

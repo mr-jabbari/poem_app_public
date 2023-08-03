@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+<html lang="fa-IR" dir="rtl" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>شاه بیت</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.scss') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+	<script src="{{ url_for('static', filename='bootstrap.bundle.js') }}"></script>
+	<script src="{{ url_for('static', filename='js.js') }}"></script>
+</head>
+
+<body id="indexbody">
+{% block content %}
+<div>
+	<button>
+		<a href="{{ url_for('edit_me') }}">تغییر اطلاعات اکانت</a>
+	</button>
+</div>
+<div>
+	<button>
+		<a href="{{ url_for('notes') }}">اضافه کردن</a>
+	</button>
+</div>
+<div>
+	<button>
+		<a href="{{ url_for('my_beyts') }}">بیت های من</a>
+	</button>
+</div>
+<div>
+	<button>
+		<a href="{{ url_for('likes') }}">لایک شده ها</a>
+	</button>
+</div>
+<div>
+	<button>
+		<a href="{{ url_for('bookmarks') }}">پسند شده ها</a>
+	</button>
+</div>
+<div>
+	<button>
+		<a href="{{ url_for('logout_page') }}">خروج از اکانت</a>
+	</button>
+</div>
+{% endblock %}
+</body>
+</html>

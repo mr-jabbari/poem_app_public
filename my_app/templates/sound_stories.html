@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+<html lang="fa-IR" dir="rtl" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>شاه بیت</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.scss') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+	<script src="{{ url_for('static', filename='bootstrap.bundle.js') }}"></script>
+	<script src="{{ url_for('static', filename='js.js') }}"></script>
+</head>
+
+<body id="indexbody">
+
+{% block body %}
+
+        <figure>
+    <figcaption>Listen to the T-Rex:</figcaption>
+        <audio
+            controls
+            src="{{ url_for('static', filename=sounds.sound_link) }}">
+            <a href="{{ url_for('static', filename=sounds.sound_link) }}">
+                Download audio
+            </a>
+        </audio>
+    </figure>
+
+{% endblock %}
+</body>
+</html>

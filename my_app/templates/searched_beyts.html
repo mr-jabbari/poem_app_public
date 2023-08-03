@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+<html lang="fa-IR" dir="rtl" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>شاه بیت</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.scss') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+	<script src="{{ url_for('static', filename='bootstrap.bundle.js') }}"></script>
+	<script src="{{ url_for('static', filename='js.js') }}"></script>
+</head>
+
+<body id="indexbody">
+{% block content %}
+
+<h1 class="matntitr">بیت ها</h1>
+	{% for beyt in beyts %}
+		<div class="container1 text-center">
+  		<div class="row">
+			{% if current_user.is_authenticated %}
+    			<div class="col-sm-4 sher" onclick="more('{{ url_for('t_beyt', beyt_id=beyt.id) }}')"><h1>{{ beyt.mesra1 }}</h1></div>
+    			<div class="col-sm-4 sher"><h1 onclick="more('{{ url_for('t_beyt', beyt_id=beyt.id) }}')">{{ beyt.mesra2 }}</h1></div>
+    		{% else %}
+				<div class="col-sm-5 sher"><h1 onclick="more('{{ url_for('t_beyt', beyt_id=beyt.id) }}')">{{ beyt.mesra1 }}</h1></div>
+	    		<div class="col-sm-5 sher"><h1 onclick="more('{{ url_for('t_beyt', beyt_id=beyt.id) }}')">{{ beyt.mesra2 }}</h1></div>
+			{% endif %}
+
+				{% if current_user.is_authenticated %}
+					{% if current_user.has_liked_beyt(beyt) %}
+						<div class="col-sm-1 likebtn"><a class="btn btn-outline-success" href="{{ url_for('likebeyt_action', beyt_id=beyt.id, action='unlike') }}" title="نپسندیدن">👎</a></div>
+					{% else %}
+						<div class="col-sm-1 likebtn"><a class="btn btn-outline-success" href="{{ url_for('likebeyt_action', beyt_id=beyt.id, action='like') }}" title="پسندیدن">👍</a></div>
+					{% endif %}
+					{% if current_user.has_bookmarked_beyt(beyt) %}
+    					<div class="col-sm-1 likebtn"><a class="btn btn-outline-success" href="{{ url_for('bookmarkbeyt_action', beyt_id=beyt.id, action='unbookmark') }}" title="حذف از لیست علاقه مندی ها">➖</a></div>
+					{% else %}
+						<div class="col-sm-1 likebtn"><a class="btn btn-outline-success" href="{{ url_for('bookmarkbeyt_action', beyt_id=beyt.id, action='bookmark') }}" title="افزودن به لیست علاقه مندی ها">➕</a></div>
+					{% endif %}
+				{% endif %}
+		  </div>
+			<br/>
+<!--			<div id="more" class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('t_beyt', beyt_id=beyt.id) }}">مشاهده بیشتر</a></div>-->
+			<div id="shaer" class="poet col-sm-2"><p>{{ beyt.poet }}</p></div>
+		</div>
+		<div class="border"></div>
+	{% endfor %}
+
+
+</div>
+</div>
+{% endblock %}
+
+
+
+</body>
+</html>

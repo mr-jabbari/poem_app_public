@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+<html lang="fa-IR" dir="rtl" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>شاه بیت</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.scss') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+	<script src="{{ url_for('static', filename='bootstrap.bundle.js') }}"></script>
+	<script src="{{ url_for('static', filename='js.js') }}"></script>
+</head>
+
+<body id="indexbody">
+{% block content %}
+{% for speech in speechs %}
+<div id="sliderr"><h1>{{ speech.speech }}</h1><br/> <p>{{ speech.wise }}</p></div>
+{% endfor %}
+{% endblock %}
+</body>
+</html>

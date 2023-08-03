@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+<html lang="fa-IR" dir="rtl" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>شاه بیت</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.scss') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+	<script src="{{ url_for('static', filename='bootstrap.bundle.js') }}"></script>
+	<script src="{{ url_for('static', filename='js.js') }}"></script>
+</head>
+
+<body id="indexbody">
+{% block content %}
+
+	{% for poem in poems %}
+		<div id="matnbody">
+
+
+
+
+    	<div id="matn" class="poembeyt fard"><h3>{{ poem.beyt1_1 }}</h3></div>
+			<div class="poembeyt zoj"><h3>{{ poem.beyt1_2 }}</h3></div>
+	<br/>
+			<div class="poembeyt fard"><h3>{{ poem.beyt2_1 }}</h3></div>
+			<div class="poembeyt zoj"><h3>{{ poem.beyt2_2 }}</h3></div>
+	<br/>
+			{% if poem.beyt3_1 %}
+			<div class="poembeyt fard"><h3>{{ poem.beyt3_1 }}</h3></div>
+			<div class="poembeyt zoj"><h3>{{ poem.beyt3_2 }}</h3></div>
+	<br/>
+			{% endif %}
+			{% if poem.beyt4_1 %}
+			<div class="poembeyt fard"><h3>{{ poem.beyt4_1 }}</h3></div>
+			<div class="poembeyt zoj"><h3>{{ poem.beyt4_2 }}</h3></div>
+			{% endif %}
+			<div class="poet"><p>{{ poem.poet }}</p></div>
+				{% if current_user.is_authenticated %}
+					{% if current_user.has_liked_poem(poem) %}
+						<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('likepoem_action', poem_id=poem.id, action='unlike') }}" title="نپسندیدن">👎</a></div>
+					{% else %}
+						<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('likepoem_action', poem_id=poem.id, action='like') }}" title="پسندیدن">👍</a></div>
+					{% endif %}
+					{% if current_user.has_bookmarked_poem(poem) %}
+    					<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('bookmarkpoem_action', poem_id=poem.id, action='unbookmark') }}" title="حذف از لیست علاقه مندی ها">➖</a></div>
+					{% else %}
+						<div class="col-sm-1"><a class="btn btn-outline-success" href="{{ url_for('bookmarkpoem_action', poem_id=poem.id, action='bookmark') }}" title="افزودن به لیست علاقه مندی ها">➕</a></div>
+					{% endif %}
+				{% endif %}
+<!--			<div class="col-sm-1" style="float : right !important;"><a class="btn btn-outline-success" href="{{ url_for('t_poem', poem_id=poem.id) }}">مشاهده بیشتر</a></div>-->
+  </div>
+	{% endfor %}
+
+
+{% endblock %}
+</body>
+</html>

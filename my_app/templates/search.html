@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+<html lang="fa-IR" dir="rtl">
+<body id="indexbody">
+{% block content %}
+
+<div class="tabbed-page">
+    <div class="tabbed-menu">
+        <button class="tab-button active" data-tab="tab1">سرچ بین ابیات</button>
+        <button class="tab-button" data-tab="tab2">سرچ بین اشعار</button>
+        <button class="tab-button" data-tab="tab3">سرچ بین داستان ها</button>
+        <button class="tab-button" data-tab="tab4">سرچ بین سخنان</button>
+    </div>
+    <div class="tabbed-content">
+        <div class="tab-content active" data-tab="tab1">
+            <h2>ابیات</h2>
+
+            <form method="post" class="form-search-beyt">
+                {{ form_search_beyt.hidden_tag() }}
+                <div class="field input-field">
+                    {{ form_search_beyt.b_word(class="form-control", placeholder="کلمه") }}
+                </div>
+                <div class="field input-field">
+                    {{ form_search_beyt.b_poet(class="form-control", placeholder="شاعر") }}
+                </div>
+                <div class="field input-field">
+                    {{ form_search_beyt.b_start(class="form-control", placeholder="شروع") }}
+                </div>
+                <div class="field input-field">
+                    {{ form_search_beyt.b_stop(class="form-control", placeholder="پایان") }}
+                </div>
+                <div class="field button-field">
+                    {{ form_search_beyt.b_submit(class="btn btn-lg btn-block btn-primary") }}
+                </div>
+            </form>
+            <!--                    <select name="start" class="form-control">-->
+            <!--                        <option value=0>حرف شروع</option>-->
+            <!--                        <option value=1>الف</option>-->
+            <!--                        <option value=2>ب</option>-->
+            <!--                        <option value=3>پ</option>-->
+            <!--                        <option value=4>ت</option>-->
+            <!--                        <option value=5>ث</option>-->
+            <!--                        <option value=6>ج</option>-->
+            <!--                        <option value=7>چ</option>-->
+            <!--                        <option value=8>ح</option>-->
+            <!--                        <option value=9>خ</option>-->
+            <!--                        <option value=10>د</option>-->
+            <!--                        <option value=11>ذ</option>-->
+            <!--                        <option value=12>ر</option>-->
+            <!--                        <option value=13>ز</option>-->
+            <!--                        <option value=14>ژ</option>-->
+            <!--                        <option value=15>س</option>-->
+            <!--                        <option value=16>ش</option>-->
+            <!--                        <option value=17>ص</option>-->
+            <!--                        <option value=18>ض</option>-->
+            <!--                        <option value=19>ط</option>-->
+            <!--                        <option value=20>ظ</option>-->
+            <!--                        <option value=21>ع</option>-->
+            <!--                        <option value=22>غ</option>-->
+            <!--                        <option value=23>ف</option>-->
+            <!--                        <option value=24>ق</option>-->
+            <!--                        <option value=25>ک</option>-->
+            <!--                        <option value=26>گ</option>-->
+            <!--                        <option value=27>ل</option>-->
+            <!--                        <option value=28>م</option>-->
+            <!--                        <option value=29>ن</option>-->
+            <!--                        <option value=30>و</option>-->
+            <!--                        <option value=31>ه</option>-->
+            <!--                        <option value=32>ی</option>-->
+            <!--                    </select>-->
+        </div>
+
+        <div class="tab-content" data-tab="tab2">
+            <h2>اشعار</h2>
+            <form method="post" class="form-search-poem">
+                {{ form_search_poem.hidden_tag() }}
+                <div class="field input-field">
+                    {{ form_search_poem.p_word(class="form-control", placeholder="کلمه") }}
+                </div>
+                <div class="field input-field">
+                    {{ form_search_poem.p_poet(class="form-control", placeholder="شاعر") }}
+                </div>
+                <div class="field button-field">
+                    {{ form_search_poem.p_submit(class="btn btn-lg btn-block btn-primary") }}
+                </div>
+            </form>
+
+        </div>
+
+        <div class="tab-content" data-tab="tab3">
+            <h2>داستان</h2>
+            <form method="post" class="form-search-poem">
+                {{ form_search_story.hidden_tag() }}
+                <div class="field input-field">
+                    {{ form_search_story.st_title(class="form-control", placeholder="اسم داستان") }}
+                </div>
+                <div class="field input-field">
+                    {{ form_search_story.st_word(class="form-control", placeholder="از متن داستان") }}
+                </div>
+                <div class="field input-field">
+                    {{ form_search_story.st_writer(class="form-control", placeholder="نویسنده") }}
+                </div>
+                <div class="field button-field">
+                    {{ form_search_story.st_submit(class="btn btn-lg btn-block btn-primary") }}
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-content" data-tab="tab4">
+            <h2>سخن</h2>
+            <form method="post" class="form-search-poem">
+                {{ form_search_speech.hidden_tag() }}
+                <div class="field input-field">
+                    {{ form_search_speech.sp_word(class="form-control", placeholder="کلمه") }}
+                </div>
+                <div class="field input-field">
+                    {{ form_search_speech.sp_wise(class="form-control", placeholder="گوینده") }}
+                </div>
+                <div class="field button-field">
+                    {{ form_search_speech.sp_submit(class="btn btn-lg btn-block btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+</body>
+</html>

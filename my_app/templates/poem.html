@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<body>
+
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt1_1 }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt1_2 }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt2_1 }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt2_2 }}</p></div>
+			{% if poem.beyt3_1 %}
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt3_1 }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt3_2 }}</p></div>
+			{% endif %}
+			{% if poem.beyt4_1 %}
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt4_1 }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.beyt4_2 }}</p></div>
+			{% endif %}
+				{% if current_user.is_authenticated %}
+					{% if current_user.has_liked_poem(poem) %}
+						<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('likepoem_action', poem_id=poem.id, action='unlike') }}">Dislike</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('likepoem_action', poem_id=poem.id, action='like') }}">like</a></div>
+					{% endif %}
+						<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ poem.poet }}</p></div>
+					{% if current_user.has_bookmarked_poem(poem) %}
+    					<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('bookmarkpoem_action', poem_id=poem.id, action='unbookmark') }}">Unmark</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('bookmarkpoem_action', poem_id=poem.id, action='bookmark') }}">Bookmark</a></div>
+					{% endif %}
+				{% endif %}
+		{% if current_user.is_authenticated %}
+		<div class="border"></div>
+		<form class="d-flex" method="POST" style="flex-direction: row-reverse;">
+			{{ form_comment_poem.hidden_tag() }}
+			{{ form_comment_poem.comment(class="form-control", placeholder="متن کامنت") }}
+			{{ form_comment_poem.submit(class="btn btn-lg btn-block btn-primary") }}
+		</form>
+		<form class="d-flex" method="POST" style="flex-direction: row-reverse;" enctype="multipart/form-data">
+			{{ form_add_sound.hidden_tag() }}
+			{{ form_add_sound.file(class="form-control", placeholder="انتخاب فایل") }}
+			{{ form_add_sound.submit(class="btn btn-lg btn-block btn-primary") }}
+		</form>
+		{% endif %}
+		{% for comment in comments %}
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ comment.comment }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><a href="{{ url_for('users_profile',user_id=comment.user_id) }}">{{ comment.username }}</a></div>
+		{% endfor %}
+
+
+</body>
+{% endblock %}

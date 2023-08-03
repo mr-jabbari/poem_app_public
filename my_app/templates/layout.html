@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fa-IR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>شاه بیت</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.scss') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+	<script src="{{ url_for('static', filename='bootstrap.bundle.js') }}"></script>
+	<script src="{{ url_for('static', filename='js.js') }}"></script>
+</head>
+
+<body>
+
+{% for message in get_flashed_messages() %}
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+	  {{ message }}
+	  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+{% endfor %}
+
+<div class="header">
+	{% include 'header.html' %}
+	{% block header %}
+    {% endblock %}
+</div>
+
+<div class="body">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<div class="footer">
+	{% include 'footer.html' %}
+	{% block footer %}{% endblock %}
+</div>
+
+	<script src="{{ url_for('static', filename='bootstrap.bundle.js') }}"></script>
+	<script src="{{ url_for('static', filename='js.js') }}"></script>
+</body>
+</html>

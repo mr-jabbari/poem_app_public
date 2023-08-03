@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+<html lang="fa-IR" dir="rtl" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>شاه بیت</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.scss') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+	<script src="{{ url_for('static', filename='bootstrap.bundle.js') }}"></script>
+	<script src="{{ url_for('static', filename='js.js') }}"></script>
+</head>
+
+
+
+<body id="indexbody">
+{% block content %}
+
+		<div class="container text-center">
+  		<div class="row">
+                <div class="col col-sm-12 col-md-12 col-lg-12 text-center"><p>{{ story.title }}</p></div>
+    			<div class="col col-sm-12 col-md-12 col-lg-12 text-center"><p>{{ story.story }}</p></div>
+
+				{% if current_user.is_authenticated %}
+					{% if current_user.has_liked_story(story) %}
+						<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('likestory_action', story_id=story.id, action='unlike') }}">Dislike</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('likestory_action', story_id=story.id, action='like') }}">like</a></div>
+					{% endif %}
+					<div class="col col-sm-6 col-md-6 col-lg-6 text-center"><p>{{ story.writer }}</p></div>
+					{% if current_user.has_bookmarked_story(story) %}
+    					<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('bookmarkstory_action', story_id=story.id, action='unbookmark') }}">Unmark</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success" href="{{ url_for('bookmarkstory_action', story_id=story.id, action='bookmark') }}">Bookmark</a></div>
+					{% endif %}
+				{% endif %}
+		  </div>
+		</div>
+		<div class="border"></div>
+		{% if current_user.is_authenticated %}
+		<div class="border"></div>
+		<form class="d-flex" method="POST" style="flex-direction: row-reverse;">
+			{{ form_comment_story.hidden_tag() }}
+			{{ form_comment_story.comment(class="form-control", placeholder="متن کامنت") }}
+			{{ form_comment_story.submit(class="btn btn-lg btn-block btn-primary") }}
+		</form>
+		{% endif %}
+		{% for comment in comments %}
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ comment.comment }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><a href="{{ url_for('users_profile',user_id=comment.user_id) }}">{{ comment.username }}</a></div>
+		{% endfor %}
+
+{% endblock %}
+</body>
+</html>

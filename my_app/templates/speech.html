@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+		<div class="col col-sm-12 col-md-8 col-lg-8"><p>{{ speech.speech }}</p></div>
+			<div class="col col-sm-6 col-md-2 col-lg-2"><p>{{ speech.wise }}</p></div>
+				{% if current_user.is_authenticated %}
+					{% if current_user.has_liked_speech(speech) %}
+						<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('likespeech_action', speech_id=speech.id, action='unlike') }}">Dislike</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('likespeech_action', speech_id=speech.id, action='like') }}">like</a></div>
+					{% endif %}
+					{% if current_user.has_bookmarked_speech(speech) %}
+    					<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('bookmarkspeech_action', speech_id=speech.id, action='unbookmark') }}">Unmark</a></div>
+					{% else %}
+						<div class="col col-sm-3 col-md-1 col-lg-1"><a class="btn btn-outline-success" href="{{ url_for('bookmarkspeech_action', speech_id=speech.id, action='bookmark') }}">Bookmark</a></div>
+					{% endif %}
+				{% endif %}
+
+		{% if current_user.is_authenticated %}
+		<div class="border"></div>
+		<form class="d-flex" method="POST" style="flex-direction: row-reverse;">
+			{{ form_comment_speech.hidden_tag() }}
+			{{ form_comment_speech.comment(class="form-control", placeholder="متن کامنت") }}
+			{{ form_comment_speech.submit(class="btn btn-lg btn-block btn-primary") }}
+		</form>
+		{% endif %}
+		{% for comment in comments %}
+			<div class="col col-sm-6 col-md-6 col-lg-6"><p>{{ comment.comment }}</p></div>
+			<div class="col col-sm-6 col-md-6 col-lg-6"><a href="{{ url_for('users_profile',user_id=comment.user_id) }}">{{ comment.username }}</a></div>
+		{% endfor %}
+
+{% endblock %}

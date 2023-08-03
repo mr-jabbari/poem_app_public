@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+    <html lang="fa" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ورود - شاه بیت</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+                
+        <!-- Boxicons CSS -->
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+                        
+    </head>
+    <body>
+        <section class="container forms">
+            <div class="form login">
+                <div class="form-content">
+                    <header>ورود</header>
+                    <form method="post" class="form-register">
+                        {{ form_login.hidden_tag() }}
+                        <div class="field input-field">
+<!--                            <input type="text" placeholder="نام کاربری" class="input">-->
+                            {{ form_login.username(class="form-control", placeholder="نام کاربری") }}
+                        </div>
+
+                        <div class="field input-field">
+<!--                            <input type="password" placeholder="رمزعبور" class="password">-->
+<!--                            <i style="margin-right: 88%;" class='bx bx-hide eye-icon'></i>-->
+                            {{ form_login.password(class="form-control", placeholder="پسورد") }}
+                        </div>
+
+                        <div class="form-link">
+                            <a href="#" class="forgot-pass">رمزعبورم را فراموش کرده ام</a>
+                        </div>
+
+                        <div class="field button-field">
+<!--                            <button>ورود</button>-->
+                            {{ form_login.submit(class="btn btn-lg btn-block btn-primary") }}
+                        </div>
+                    </form>
+
+                    <div class="form-link">
+                        <span>حساب کاربری ندارید؟<a href="#" class="link signup-link">ثبت نام</a></span>
+                    </div>
+                </div>
+
+                <div class="line"></div>
+
+                <div class="media-options">
+                    <a href="#" class="field facebook">
+                        <i class='bx bxl-facebook facebook-icon'></i>
+                        <span>ورود با اکانت فیس بوک</span>
+                    </a>
+                </div>
+
+                <div class="media-options">
+                    <a href="#" class="field google">
+                        <img src="images/google.png" alt="" class="google-img">
+                        <span>ورود با اکانت گوگل</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Signup Form -->
+
+            <div class="form signup">
+                <div class="form-content">
+                    <header>ثبت نام</header>
+                    <form method="post" class="form-register">
+                        {{ form_register.hidden_tag() }}
+                        <div class="field input-field">
+<!--                            <input type="text" placeholder="نام کاربری" class="input">-->
+                            {{ form_register.name(class="form-control", placeholder="نام و فامیل") }}
+                        </div>
+
+                        <div class="field input-field">
+<!--                            <input type="text" placeholder="نام کاربری" class="input">-->
+                            {{ form_register.username(class="form-control", placeholder="نام کاربری") }}
+                        </div>
+
+                        <div class="field input-field">
+<!--                            <input type="text" placeholder="ایمیل یا تلفن همراه" class="input">-->
+                            {{ form_register.phone_email(class="form-control", placeholder="ایمیل یا شماره همراه") }}
+                        </div>
+
+                        <div class="field input-field">
+<!--                            <input type="password" placeholder="رمزعبور" class="password">-->
+<!--                            <i style="margin-right: 88%;" class='bx bx-hide eye-icon'></i>-->
+                            {{ form_register.password_hash(class="form-control", placeholder="پسورد") }}
+                        </div>
+
+                        <div class="field input-field">
+<!--                            <input type="password" placeholder="تکرار رمز عبور" class="password">-->
+<!--                            <i style="margin-right: 88%;" class='bx bx-hide eye-icon'></i>-->
+                            {{ form_register.password_hash2(class="form-control", placeholder="تکرار پسورد") }}
+                        </div>
+
+                        <div class="field button-field">
+                            {{ form_register.submit(class="btn btn-lg btn-block btn-primary") }}
+<!--                            <button>ثبت نام</button>-->
+                        </div>
+                    </form>
+
+                    <div class="form-link">
+                        <span>از قبل حساب کاربری دارید؟<a href="#" class="link login-link">ورود</a></span>
+                    </div>
+                </div>
+
+                <div class="line"></div>
+
+                <div class="media-options">
+                    <a href="#" class="field facebook">
+                        <i class='bx bxl-facebook facebook-icon'></i>
+                        <span>ورود با اکانت فیس بوک</span>
+                    </a>
+                </div>
+
+                <div class="media-options">
+                    <a href="#" class="field google">
+                        <img src="images/google.png" alt="" class="google-img">
+                        <span>ورود با اکانت گوگل</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- JavaScript -->
+        <script src="{{ url_for('static', filename='login.js') }}"></script>
+    </body>
+</html>

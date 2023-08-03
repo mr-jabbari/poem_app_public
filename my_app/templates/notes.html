@@ -1,0 +1,136 @@
+{% extends "layout.html" %}
+<html lang="fa-IR" dir="rtl">
+<body id="indexbody">
+{% block content %}
+<div class="tabbed-page">
+  <div class="tabbed-menu">
+    <button class="tab-button active" data-tab="tab1">ابیات</button>
+    <button class="tab-button" data-tab="tab2">اشعار</button>
+    <button class="tab-button" data-tab="tab3">داستان ها</button>
+    <button class="tab-button" data-tab="tab4">سخنان</button>
+  </div>
+  <div class="tabbed-content">
+    <div class="tab-content active" data-tab="tab1">
+      <h2>ابیات</h2>
+      <div class="container">
+        <form method="post" class="form-register" style="color:white">
+          {{ form_beyt.hidden_tag() }}
+          <h1 class="h3">اضافه کردن شاه بیت</h1><br>
+
+          {{ form_beyt.mesra1.label() }}
+          {{ form_beyt.mesra1(class="form-control", placeholder="مصراع اول") }}
+
+          {{ form_beyt.mesra2.label() }}
+          {{ form_beyt.mesra2(class="form-control", placeholder="مصراع دوم") }}
+
+          {{ form_beyt.poet.label() }}
+          {{ form_beyt.poet(class="form-control", placeholder="شاعر") }}
+
+          {{ form_beyt.start.label() }}
+          {{ form_beyt.start(class="form-control", placeholder="حرف اول") }}
+
+          {{ form_beyt.stop.label() }}
+          {{ form_beyt.stop(class="form-control", placeholder="حرف آخر") }}
+
+          <br>
+          {{ form_beyt.submit(class="btn btn-lg btn-block btn-primary") }}
+        </form>
+      </div>
+    </div>
+
+    <div class="tab-content" data-tab="tab2">
+      <h2>اشعار</h2>
+      <div class="container">
+        <form method="post" class="form-register" style="color:white">
+          {{ form_poem.hidden_tag() }}
+          <h1 class="h3">اضافه کردن چند بیتی</h1><br>
+
+          {{ form_poem.beyt1_1.label() }}
+          {{ form_poem.beyt1_1(class="form-control", placeholder="بیت اول مصراع اول") }}
+
+          {{ form_poem.beyt1_2.label() }}
+          {{ form_poem.beyt1_2(class="form-control", placeholder="بیت اول مصراع دوم") }}
+
+          {{ form_poem.beyt2_1.label() }}
+          {{ form_poem.beyt2_1(class="form-control", placeholder="بیت دوم مصراع اول") }}
+
+          {{ form_poem.beyt2_2.label() }}
+          {{ form_poem.beyt2_2(class="form-control", placeholder="بیت دوم مصراع دوم") }}
+
+          {{ form_poem.beyt3_1.label() }}
+          {{ form_poem.beyt3_1(class="form-control", placeholder="بیت سوم مصراع اول") }}
+
+          {{ form_poem.beyt3_2.label() }}
+          {{ form_poem.beyt3_2(class="form-control", placeholder="بیت سوم مصراع دوم") }}
+
+          {{ form_poem.beyt4_1.label() }}
+          {{ form_poem.beyt4_1(class="form-control", placeholder="بیت چهارم مصراع اول") }}
+
+          {{ form_poem.beyt4_2.label() }}
+          {{ form_poem.beyt4_2(class="form-control", placeholder="بیت چهارم مصراع دوم") }}
+
+          {{ form_poem.poet.label() }}
+          {{ form_poem.poet(class="form-control", placeholder="شاعر") }}
+          <br>
+          {{ form_poem.submit(class="btn btn-lg btn-block btn-primary") }}
+        </form>
+      </div>
+    </div>
+
+    <div class="tab-content" data-tab="tab3">
+      <h2>داستان</h2>
+      <div class="container">
+        <form method="post" class="form-register" style="color:white">
+          {{ form_speech.hidden_tag() }}
+          <h1 class="h3">اضافه کردن سخنی دل نشین</h1><br>
+
+          {{ form_speech.speech.label() }}
+          {{ form_speech.speech(class="form-control", placeholder="سخن") }}
+
+          {{ form_speech.wise.label() }}
+          {{ form_speech.wise(class="form-control", placeholder="گوینده سخن") }}
+          <br>
+
+          <br>
+          {{ form_speech.submit(class="btn btn-lg btn-block btn-primary") }}
+        </form>
+      </div>
+    </div>
+
+    <div class="tab-content" data-tab="tab4">
+      <h2>سخن</h2>
+      <div class="container">
+        <form method="post" class="form-register" style="color:white">
+          {{ form_story.hidden_tag() }}
+          <h1 class="h3">اضافه کردن داستان</h1><br>
+
+          {{ form_story.title.label() }}
+          {{ form_story.title(class="form-control", placeholder="اسم داستان") }}
+
+          {{ form_story.story.label() }}
+          {{ form_story.story(class="form-control", placeholder="متن داستان") }}
+
+          {{ form_story.writer.label() }}
+          {{ form_story.writer(class="form-control", placeholder="نویسنده") }}
+
+          <br>
+          {{ form_story.submit(class="btn btn-lg btn-block btn-primary") }}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+</body>
+</html>

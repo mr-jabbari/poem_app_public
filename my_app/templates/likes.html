@@ -1,0 +1,156 @@
+{% extends "layout.html" %}
+<html lang="fa-IR" dir="rtl">
+<body id="indexbody">
+{% block content %}
+
+<div class="tabbed-page">
+    <div class="tabbed-menu">
+        <button class="tab-button active" data-tab="tab1">ابیات</button>
+        <button class="tab-button" data-tab="tab2">اشعار</button>
+        <button class="tab-button" data-tab="tab3">داستان ها</button>
+        <button class="tab-button" data-tab="tab4">سخنان</button>
+    </div>
+    <div class="tabbed-content">
+        <div class="tab-content active" data-tab="tab1">
+            <h2>ابیات</h2>
+
+            {% for beyt in beyts %}
+            <div class="container1 text-center">
+                <div class="row">
+                    {% if current_user.is_authenticated %}
+                    <div class="col-sm-4 sher" onclick="more('{{ url_for('t_beyt', beyt_id=beyt.id) }}')"><h1>{{
+                        beyt.mesra1 }}</h1></div>
+                    <div class="col-sm-4 sher"><h1 onclick="more('{{ url_for('t_beyt', beyt_id=beyt.id) }}')">{{
+                        beyt.mesra2 }}</h1></div>
+                    {% else %}
+                    <div class="col-sm-5 sher"><h1 onclick="more('{{ url_for('t_beyt', beyt_id=beyt.id) }}')">{{
+                        beyt.mesra1 }}</h1></div>
+                    <div class="col-sm-5 sher"><h1 onclick="more('{{ url_for('t_beyt', beyt_id=beyt.id) }}')">{{
+                        beyt.mesra2 }}</h1></div>
+                    {% endif %}
+
+                    {% if current_user.is_authenticated %}
+                    {% if current_user.has_liked_beyt(beyt) %}
+                    <div class="col-sm-1 likebtn"><a class="btn btn-outline-success"
+                                                     href="{{ url_for('likebeyt_action', beyt_id=beyt.id, action='unlike') }}"
+                                                     title="نپسندیدن">👎</a></div>
+                    {% else %}
+                    <div class="col-sm-1 likebtn"><a class="btn btn-outline-success"
+                                                     href="{{ url_for('likebeyt_action', beyt_id=beyt.id, action='like') }}"
+                                                     title="پسندیدن">👍</a></div>
+                    {% endif %}
+                    {% if current_user.has_bookmarked_beyt(beyt) %}
+                    <div class="col-sm-1 likebtn"><a class="btn btn-outline-success"
+                                                     href="{{ url_for('bookmarkbeyt_action', beyt_id=beyt.id, action='unbookmark') }}"
+                                                     title="حذف از لیست علاقه مندی ها">➖</a></div>
+                    {% else %}
+                    <div class="col-sm-1 likebtn"><a class="btn btn-outline-success"
+                                                     href="{{ url_for('bookmarkbeyt_action', beyt_id=beyt.id, action='bookmark') }}"
+                                                     title="افزودن به لیست علاقه مندی ها">➕</a></div>
+                    {% endif %}
+                    {% endif %}
+                </div>
+                <br/>
+                <div id="shaer" class="poet col-sm-2"><p>{{ beyt.poet }}</p></div>
+            </div>
+            <div class="border"></div>
+            {% endfor %}
+        </div>
+
+        <div class="tab-content" data-tab="tab2">
+            <h2>اشعار</h2>
+            {% for poem in poems %}
+            <div id="matn" class="poembeyt fard"><h3>{{ poem.beyt1_1 }}</h3></div>
+            <div class="poembeyt zoj"><h3>{{ poem.beyt1_2 }}</h3></div>
+            <br/>
+            <div class="poembeyt fard"><h3>{{ poem.beyt2_1 }}</h3></div>
+            <div class="poembeyt zoj"><h3>{{ poem.beyt2_2 }}</h3></div>
+            <br/>
+            {% if poem.beyt3_1 %}
+            <div class="poembeyt fard"><h3>{{ poem.beyt3_1 }}</h3></div>
+            <div class="poembeyt zoj"><h3>{{ poem.beyt3_2 }}</h3></div>
+            <br/>
+            {% endif %}
+            {% if poem.beyt4_1 %}
+            <div class="poembeyt fard"><h3>{{ poem.beyt4_1 }}</h3></div>
+            <div class="poembeyt zoj"><h3>{{ poem.beyt4_2 }}</h3></div>
+            {% endif %}
+            <div class="poet"><p>{{ poem.poet }}</p></div>
+            {% if current_user.is_authenticated %}
+            {% if current_user.has_liked_poem(poem) %}
+            <div class="col-sm-1"><a class="btn btn-outline-success"
+                                     href="{{ url_for('likepoem_action', poem_id=poem.id, action='unlike') }}"
+                                     title="نپسندیدن">👎</a></div>
+            {% else %}
+            <div class="col-sm-1"><a class="btn btn-outline-success"
+                                     href="{{ url_for('likepoem_action', poem_id=poem.id, action='like') }}"
+                                     title="پسندیدن">👍</a></div>
+            {% endif %}
+            {% if current_user.has_bookmarked_poem(poem) %}
+            <div class="col-sm-1"><a class="btn btn-outline-success"
+                                     href="{{ url_for('bookmarkpoem_action', poem_id=poem.id, action='unbookmark') }}"
+                                     title="حذف از لیست علاقه مندی ها">➖</a></div>
+            {% else %}
+            <div class="col-sm-1"><a class="btn btn-outline-success"
+                                     href="{{ url_for('bookmarkpoem_action', poem_id=poem.id, action='bookmark') }}"
+                                     title="افزودن به لیست علاقه مندی ها">➕</a></div>
+            {% endif %}
+            {% endif %}
+            <!--			<div class="col-sm-1" style="float : right !important;"><a class="btn btn-outline-success" href="{{ url_for('t_poem', poem_id=poem.id) }}">مشاهده بیشتر</a></div>-->
+            {% endfor %}
+
+        </div>
+
+        <div class="tab-content" data-tab="tab3">
+            <h2>داستان</h2>
+            <div class="container text-center">
+                <div class="row">
+                    {% for story in stories %}
+                    <div class="col col-sm-12 col-md-12 col-lg-12 text-center"><p>{{ story.title }}</p></div>
+                    <div onclick="more('{{ url_for('t_story', story_id=story.id) }}')"
+                         class="col col-sm-12 col-md-12 col-lg-12 text-center"><p>{{ story.story }}</p></div>
+
+                    {% if current_user.is_authenticated %}
+                    {% if current_user.has_liked_story(story) %}
+                    <div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success"
+                                                                   href="{{ url_for('likestory_action', story_id=story.id, action='unlike') }}">👎</a>
+                    </div>
+                    {% else %}
+                    <div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success"
+                                                                   href="{{ url_for('likestory_action', story_id=story.id, action='like') }}">👍</a>
+                    </div>
+                    {% endif %}
+                    <div class="col col-sm-6 col-md-6 col-lg-6 text-center"><p>{{ story.writer }}</p></div>
+                    {% if current_user.has_bookmarked_story(story) %}
+                    <div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success"
+                                                                   href="{{ url_for('bookmarkstory_action', story_id=story.id, action='unbookmark') }}">➖</a>
+                    </div>
+                    {% else %}
+                    <div class="col col-sm-3 col-md-3 col-lg-3"><a class="btn btn-outline-success"
+                                                                   href="{{ url_for('bookmarkstory_action', story_id=story.id, action='bookmark') }}">➕</a>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    <br>
+                    <div><br></div>
+                </div>
+            </div>
+            <div class="border"></div>
+            {% endfor %}
+        </div>
+
+        <div class="tab-content" data-tab="tab4">
+            <h2>سخن</h2>
+            {% for speech in speechs %}
+            <div id="sliderr"><h1>{{ speech.speech }}</h1><br/>
+                <p>{{ speech.wise }}</p></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+</body>
+</html>

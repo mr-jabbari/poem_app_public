@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="static/footer-fonts/icomoon/style.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='footer-css/ionicons.min.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='footer-css/style.css') }}">
+  </head>
+  <body>
+  {% block footer %}
+		<footer class="footer-02">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-10 col-lg-6">
+						<div class="subscribe mb-5">
+							<form action="#" class="subscribe-form">
+              </form>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 col-lg-5">
+						<div class="row">
+							<div class="col-md-12 col-lg-8 mb-md-0 mb-4" style="direction : rtl !important;">
+								<h2 class="footer-heading"><a href="#" class="logo">درباره این سایت</a></h2>
+								<p>این سایت برای غرق شدن در اشعار و کمی آرامش طراحی شده. هر پیشنهادی درباره این سایت به بهتر شدنش کمک میکنه</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 col-lg-7">
+						<div class="row">
+							<div class="col-md-3 mb-md-0 mb-4">
+							</div>
+							<div class="col-md-3 mb-md-0 mb-4 border-left">
+								<h2 class="footer-heading">تیم</h2>
+								<ul class="list-unstyled">
+		              <li><a href="https://t.me/MsahrdaI_730" class="py-1 d-block">فرانت</a></li>
+		              <li><a href="https://t.me/Jabbari79" class="py-1 d-block">بکند</a></li>
+		              <li><a href="https://t.me/Shmm2001" class="py-1 d-block">اندروید</a></li>
+		            </ul>
+							</div>
+							<div class="col-md-3 mb-md-0 mb-4 border-left">
+								<h2 class="footer-heading">دسته بندی ها</h2>
+								<ul class="list-unstyled">
+		              <li><a href="{{ url_for('beyts') }}" class="py-1 d-block">ابیات</a></li>
+		              <li><a href="{{ url_for('poems') }}" class="py-1 d-block">اشعار</a></li>
+		              <li><a href="{{ url_for('stories') }}" class="py-1 d-block">داستان ها</a></li>
+		              <li><a href="{{ url_for('speechs') }}" class="py-1 d-block">سخنان</a></li>
+		            </ul>
+							</div>
+							<div class="col-md-3 mb-md-0 mb-4 border-left">
+								<h2 class="footer-heading">صفحات مجازی</h2>
+								<ul class="list-unstyled">
+		              <li><a href="#" class="py-1 d-block">توییتر</a></li>
+		              <li><a href="#" class="py-1 d-block">اینستاگرام</a></li>
+		              <li><a href="#" class="py-1 d-block">تلگرام</a></li>
+		              <li><a href="#" class="py-1 d-block">یوتیوب</a></li>
+		            </ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row partner-wrap mt-5">
+					<div class="col-md-12">
+						<div class="row align-items-center">
+							<div class="col">
+								<h3 class="mb-0">منابع :</h3>
+							</div>
+							<div class="col-md-9">
+								<p class="partner-name mb-0">
+									<a href="https://github.com/mr-jabbari/poem_app"><span class="ion-logo-ionic mr-2"></span>کدهای وبسایت و بک اند</a>
+									<a href="https://github.com/mr-jabbari/poem_app_phone"><span class="ion-logo-ionic mr-2"></span>کد برنامه موبایل</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-5">
+          <div class="col-md-6 col-lg-8">
+            <p class="copyright">&copy تمام حقوق این سایت متعلق به کسانی میباشد که قصد سواستفاده ندارند.</p>
+		  </div>
+        </div>
+			</div>
+		</footer>
+		{% endblock %}
+    <script src="{{ url_for('static', filename='footer-js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='footer-js/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename='footer-js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='footer-js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='search_script.js') }}"></script>
+  </body>
+</html>
